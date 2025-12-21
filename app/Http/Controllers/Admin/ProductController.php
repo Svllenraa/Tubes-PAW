@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class ProductController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if (! $request->user() || $request->user()->role !== 'admin') {
+                abort(403);
+            }
+            return $next($request);
+        });
+    }
+
+    public function index()
+    {
+        $products = Product::latest()->paginate(15);
+        return view('admin.products.index', compact('products'));
+    }
+
+    public function create()
+    {
+        return view('admin.products.create');
+    }
+
+    public function store(ProductRequest $request)
+    {
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+        $data['slug'] = Str::slug($data['name']).'-'.Str::random(6);
+        Product::create($data);
+        return redirect()->route('admin.products.index')->with('success', 'Product created');
+    }
+
+    public function edit(Product $product)
+    {
+        return view('admin.products.edit', compact('product'));
+    }
+
+    public function update(ProductRequest $request, Product $product)
+    {
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+        $product->update($data);
+        return redirect()->route('admin.products.index')->with('success', 'Product updated');
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect()->route('admin.products.index')->with('success', 'Product deleted');
+    }
+}
