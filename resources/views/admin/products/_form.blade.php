@@ -14,6 +14,16 @@
     @error('price')<div class="text-red-600">{{ $message }}</div>@enderror
 </div>
 <div>
+    <label class="block">Category</label>
+    <select name="category_id" class="w-full border px-2 py-1">
+        <option value="">-- None --</option>
+        @foreach($categories ?? [] as $cat)
+            <option value="{{ $cat->id }}" {{ (string)($cat->id) === (string) old('category_id', $product->category_id ?? '') ? 'selected' : '' }}>{{ $cat->name }}</option>
+        @endforeach
+    </select>
+    @error('category_id')<div class="text-red-600">{{ $message }}</div>@enderror
+</div>
+<div>
     <label class="block">Image</label>
     <input type="file" name="image" class="w-full">
     @if(!empty($product->image))
