@@ -1,3 +1,96 @@
+# TubesPAW
+
+Project tugas kuliah: sistem autentikasi dan manajemen produk/kategori/order dengan role `admin` dan `user`.
+
+## Ringkasan fitur
+- Autentikasi: register, login, logout, konfirmasi password, reset password
+- Role-based access: `admin` (Dashboard, Product, Category, Order, User), `user` (Home, Product List, Cart, Checkout, Profile)
+- CRUD: `User`, `Product`, `Category`, `Order`
+- Responsive UI (Tailwind/Bootstrap - pilih salah satu di kode)
+- Tests: feature tests untuk auth dan beberapa alur (jalankan `php artisan test`)
+
+## Prasyarat
+- PHP 8.1+ (disarankan 8.2)
+- Composer
+- Node.js + npm/yarn (jika menggunakan assets frontend)
+- Database (MySQL/Postgres/SQLite)
+
+## Instalasi (pengembang)
+1. Clone repository
+
+```bash
+git clone <repo-url>
+cd TubesPAW
+```
+
+2. Instal dependensi PHP
+
+```bash
+composer install
+```
+
+3. Copy environment
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. Atur kredensial database di `.env` lalu jalankan migrasi dan seeder
+
+```bash
+php artisan migrate --seed
+```
+
+5. (Opsional) Build frontend
+
+```bash
+npm ci
+npm run build
+```
+
+6. Jalankan server development
+
+```bash
+php artisan serve
+```
+
+## Menjalankan test
+
+```bash
+php artisan test
+```
+
+## Contoh akun demo
+- Admin: buat melalui seeder atau tinker. Contoh membuat via tinker:
+
+```bash
+php artisan tinker
+>>> \App\Models\User::factory()->create(["email" => "admin@example.com", "role" => "admin", "password" => bcrypt('password')]);
+```
+
+Ganti atribut sesuai struktur `User` di projek.
+
+## Struktur penting
+- Routes: `routes/web.php` (halaman publik dan dashboard), `routes/auth.php` (auth routes)
+- Controllers: `app/Http/Controllers/Auth` (auth controllers), controllers untuk `Product`, `Category`, `Order`, `User` berada di `app/Http/Controllers`
+- Requests/Validation: `app/Http/Requests`
+- Views: `resources/views`
+- Migrations: `database/migrations`
+ 
+## Deployment singkat
+Lihat `DEPLOY.md` untuk checklist deploy ke server produksi.
+
+## Catatan tugas
+- Fokuskan penilaian ke fitur yang diminta: autentikasi, role-based access, CRUD minimal 3 entitas (user, product, category, order), responsive UI, dan dokumentasi (`README.md`).
+- CI/CD dan deploy otomatis berguna tapi tidak wajib untuk tugas; biarkan atau hapus workflow `.github/workflows/deploy.yml` jika ingin repo lebih sederhana.
+
+## Saran lanjut
+- Tambahkan seeder untuk admin/user default untuk demo.
+- Siapkan beberapa screenshot di `README.md` atau `docs/` untuk penilaian.
+
+---
+Jika mau, saya bisa: menambahkan seeder contoh untuk admin/user (pilih 3), atau menambahkan screenshot contoh ke `README.md`.
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
