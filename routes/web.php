@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
 // Admin product routes (use 'admin' middleware alias)
 Route::prefix('admin')->name('admin.')->middleware(['auth','admin'])->group(function () {
     Route::resource('products', ProductController::class)->except(['show']);
+    Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class)->except(['show']);
 });
 
 require __DIR__.'/auth.php';
