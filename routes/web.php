@@ -18,8 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Admin product routes (role check in controller)
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+// Admin product routes (use 'admin' middleware alias)
+Route::prefix('admin')->name('admin.')->middleware(['auth','admin'])->group(function () {
     Route::resource('products', ProductController::class)->except(['show']);
 });
 
