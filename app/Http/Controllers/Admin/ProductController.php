@@ -17,10 +17,23 @@ class ProductController extends Controller
         $this->middleware(\App\Http\Middleware\AdminMiddleware::class);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->latest()->paginate(15);
-        return view('admin.products.index', compact('products'));
+        $query = Product::with('category')->latest();
+
+        if ($request->filled('q')) {
+            $query->where('name', 'like', '%'.$request->q.'%');
+        }
+
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        $products = $query->paginate(15)->appends($request->only('q', 'category_id'));
+
+        $categories = Category::orderBy('name')->get();
+
+        return view('admin.products.index', compact('products', 'categories'));
     }
 
     public function create()

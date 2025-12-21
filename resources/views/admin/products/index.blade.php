@@ -11,6 +11,26 @@
         <div class="mb-4 text-green-600">{{ session('success') }}</div>
     @endif
 
+    <form method="GET" class="mb-4 flex gap-2 items-end">
+        <div>
+            <label class="block text-sm">Search</label>
+            <input type="text" name="q" value="{{ request('q') }}" placeholder="Name" class="border px-2 py-1">
+        </div>
+        <div>
+            <label class="block text-sm">Category</label>
+            <select name="category_id" class="border px-2 py-1">
+                <option value="">-- All --</option>
+                @foreach($categories ?? [] as $cat)
+                    <option value="{{ $cat->id }}" {{ (string)$cat->id === (string) request('category_id') ? 'selected' : '' }}>{{ $cat->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
+            <button class="btn btn-secondary" type="submit">Filter</button>
+            <a href="{{ route('admin.products.index') }}" class="ml-2">Clear</a>
+        </div>
+    </form>
+
     <table class="min-w-full bg-white">
         <thead>
             <tr>
