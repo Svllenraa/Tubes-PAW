@@ -32,6 +32,21 @@
             </label>
         </div>
 
+        <!-- Login As -->
+        <div class="mt-4">
+            <span class="text-sm text-gray-600">{{ __('Login as') }}</span>
+            <div class="mt-2">
+                <label class="inline-flex items-center me-4">
+                    <input type="radio" name="login_as" value="user" checked class="rounded border-gray-300 text-indigo-600">
+                    <span class="ms-2 text-sm text-gray-600">User</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="login_as" value="admin" class="rounded border-gray-300 text-indigo-600">
+                    <span class="ms-2 text-sm text-gray-600">Admin</span>
+                </label>
+            </div>
+        </div>
+
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">

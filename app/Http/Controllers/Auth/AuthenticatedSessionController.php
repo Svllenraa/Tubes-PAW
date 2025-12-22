@@ -24,9 +24,27 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        $loginAs = $request->input('login_as', 'user');
+
         $request->authenticate();
 
+        // if user requested admin mode but isn't an admin, reject
+        if ($loginAs === 'admin' && $request->user()->role !== 'admin') {
+            Auth::guard('web')->logout();
+
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return back()->withErrors(['email' => 'You do not have admin access.'])->withInput();
+        }
+
+        // store preferred dashboard mode in session
+        $request->session()->put('login_as', $loginAs);
+
         $request->session()->regenerate();
+
+        // clear any lingering status flash messages (e.g., password-updated)
+        $request->session()->forget('status');
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

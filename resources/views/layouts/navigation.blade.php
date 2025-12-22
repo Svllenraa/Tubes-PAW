@@ -19,7 +19,18 @@
             </div>
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <a href="{{ route('cart.index') }}" class="me-4 inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 me-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Cart</span>
+                    <span class="ms-2 bg-red-600 text-white rounded-full px-2 py-0.5 text-xs">
+                        {{ array_sum(session('cart', [])) ?: 0 }}
+                    </span>
+                </a>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -38,6 +49,10 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('orders.index')">
+                            {{ __('My Orders') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -51,6 +66,12 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @else
+            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <a href="{{ route('login') }}" class="px-3 py-2 text-sm text-gray-700">Login</a>
+                <a href="{{ route('register') }}" class="px-3 py-2 text-sm text-gray-700">Register</a>
+            </div>
+            @endauth
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -83,6 +104,10 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('orders.index')">
+                        {{ __('My Orders') }}
+                    </x-responsive-nav-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

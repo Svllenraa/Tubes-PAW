@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
 
         // Create admin user for demo
         $this->call([AdminSeeder::class]);
+
+        // Seed sample categories and products for frontend
+        $this->call([ProductSeeder::class]);
     }
 }
