@@ -17,15 +17,18 @@
 
             @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <a href="{{ route('cart.index') }}" class="me-4 inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-theme-dark bg-transparent hover:bg-theme-bg hover:text-theme-main transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 me-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>Cart</span>
-                    <span class="ms-2 bg-theme-dark text-white rounded-full px-2 py-0.5 text-xs">
-                        {{ array_sum(session('cart', [])) ?: 0 }}
-                    </span>
-                </a>
+                {{-- PERBAIKAN: Cart disembunyikan untuk Admin --}}
+                @if(Auth::user()->role !== 'admin')
+                    <a href="{{ route('cart.index') }}" class="me-4 inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-theme-dark bg-transparent hover:bg-theme-bg hover:text-theme-main transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 me-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Cart</span>
+                        <span class="ms-2 bg-theme-dark text-white rounded-full px-2 py-0.5 text-xs">
+                            {{ array_sum(session('cart', [])) ?: 0 }}
+                        </span>
+                    </a>
+                @endif
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -45,13 +48,15 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('orders.index')">
-                            {{ __('My Orders') }}
-                        </x-dropdown-link>
+                        {{-- PERBAIKAN: My Orders disembunyikan untuk Admin --}}
+                        @if(Auth::user()->role !== 'admin')
+                            <x-dropdown-link :href="route('orders.index')">
+                                {{ __('My Orders') }}
+                            </x-dropdown-link>
+                        @endif
 
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
@@ -98,13 +103,15 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('orders.index')">
-                    {{ __('My Orders') }}
-                </x-responsive-nav-link>
+                {{-- PERBAIKAN: My Orders disembunyikan untuk Admin (Mobile) --}}
+                @if(Auth::user()->role !== 'admin')
+                    <x-responsive-nav-link :href="route('orders.index')">
+                        {{ __('My Orders') }}
+                    </x-responsive-nav-link>
+                @endif
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
