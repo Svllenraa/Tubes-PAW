@@ -1,22 +1,25 @@
 <x-guest-layout>
-    <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-theme-dark">Welcome Back</h2>
+        <p class="text-gray-500 text-sm">Please login to your account</p>
+    </div>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-input-label for="email" :value="__('Email')" class="text-theme-dark" />
+            <x-text-input id="email" class="block mt-1 w-full border-theme-soft focus:border-theme-main focus:ring-theme-main rounded-lg" 
+                          type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Password')" class="text-theme-dark" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
+            <x-text-input id="password" class="block mt-1 w-full border-theme-soft focus:border-theme-main focus:ring-theme-main rounded-lg"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
@@ -24,37 +27,35 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                <input id="remember_me" type="checkbox" class="rounded border-theme-soft text-theme-main shadow-sm focus:ring-theme-main" name="remember">
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
 
-        <!-- Login As -->
-        <div class="mt-4">
-            <span class="text-sm text-gray-600">{{ __('Login as') }}</span>
-            <div class="mt-2">
-                <label class="inline-flex items-center me-4">
-                    <input type="radio" name="login_as" value="user" checked class="rounded border-gray-300 text-indigo-600">
-                    <span class="ms-2 text-sm text-gray-600">User</span>
+        <div class="mt-4 p-3 bg-theme-bg/50 rounded-lg border border-theme-soft">
+            <span class="block text-sm font-semibold text-theme-dark mb-2">{{ __('Login as:') }}</span>
+            <div class="flex gap-4">
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="radio" name="login_as" value="user" checked class="rounded-full border-theme-soft text-theme-main focus:ring-theme-main">
+                    <span class="ms-2 text-sm text-gray-700">Customer</span>
                 </label>
-                <label class="inline-flex items-center">
-                    <input type="radio" name="login_as" value="admin" class="rounded border-gray-300 text-indigo-600">
-                    <span class="ms-2 text-sm text-gray-600">Admin</span>
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="radio" name="login_as" value="admin" class="rounded-full border-theme-soft text-theme-main focus:ring-theme-main">
+                    <span class="ms-2 text-sm text-gray-700">Administrator</span>
                 </label>
             </div>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-end mt-6">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                <a class="underline text-sm text-gray-500 hover:text-theme-main rounded-md focus:outline-none transition-colors" href="{{ route('password.request') }}">
+                    {{ __('Forgot password?') }}
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-primary-button class="ms-3 !bg-theme-dark hover:!bg-theme-main focus:!bg-theme-main active:!bg-theme-dark transition-colors">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
