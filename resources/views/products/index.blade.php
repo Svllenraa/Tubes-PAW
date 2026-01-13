@@ -17,6 +17,18 @@
         </div>
     </div>
 
+    <!-- Clickable Category Links -->
+    <div class="mb-6">
+        <h2 class="mb-3 text-lg font-semibold text-theme-dark">Browse by Category</h2>
+        <div class="flex flex-wrap gap-2">
+            @foreach($categories as $cat)
+                <a href="{{ route('categories.show', $cat->slug) }}" class="px-3 py-2 text-sm font-medium text-theme-main bg-theme-bg rounded-lg hover:bg-theme-main hover:text-white transition-colors">
+                    {{ $cat->name }}
+                </a>
+            @endforeach
+        </div>
+    </div>
+
     <div class="p-4 mb-8 border shadow-sm bg-white/60 rounded-xl border-theme-soft">
         <form method="GET" action="{{ route('products.index') }}" class="flex flex-col gap-3 sm:flex-row">
             <input type="text" name="q" value="{{ request('q') }}" placeholder="Search products..."
@@ -55,9 +67,15 @@
 
                 <div class="flex flex-col flex-grow p-5">
                     <div class="mb-2">
-                         <span class="px-2 py-1 text-xs font-bold tracking-wider uppercase rounded-md text-theme-main bg-theme-bg">
-                            {{ $product->category?->name ?? 'Uncategorized' }}
-                        </span>
+                        @if($product->category)
+                            <a href="{{ route('categories.show', $product->category->slug) }}" class="inline-block px-2 py-1 text-xs font-bold tracking-wider uppercase rounded-md text-theme-main bg-theme-bg hover:bg-theme-main hover:text-white transition-colors">
+                                {{ $product->category->name }}
+                            </a>
+                        @else
+                            <span class="px-2 py-1 text-xs font-bold tracking-wider uppercase rounded-md text-theme-main bg-theme-bg">
+                                Uncategorized
+                            </span>
+                        @endif
                     </div>
 
                     <h2 class="mb-1 text-xl font-bold transition-colors text-theme-dark hover:text-theme-main">
