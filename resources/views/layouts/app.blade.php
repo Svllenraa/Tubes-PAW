@@ -19,7 +19,7 @@
 
             @isset($header)
                 <header class="bg-white/50 backdrop-blur-md shadow-sm border-b border-theme-soft sticky top-20 z-40">
-                    <div class="max-w-[1600px] mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-[1680px] mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
