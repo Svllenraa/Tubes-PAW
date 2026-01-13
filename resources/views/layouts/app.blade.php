@@ -18,7 +18,7 @@
 
             @isset($header)
                 <header class="bg-white/50 backdrop-blur-md shadow-sm border-b border-theme-soft">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-[1680px] mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
@@ -33,9 +33,8 @@
             </main>
         </div>
 
-        <!-- Footer -->
         <footer class="bg-gray-800 text-white py-6">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <p>www.bajamas.com</p>
             </div>
         </footer>

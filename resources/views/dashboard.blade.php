@@ -11,7 +11,7 @@
     </x-slot>
 
     <div class="py-10">
-        <div class="max-w-[1600px] mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="text-gray-900">
                 @php
