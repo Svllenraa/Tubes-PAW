@@ -17,27 +17,48 @@ class DashboardController extends Controller
     {
         $mode = $request->session()->get('login_as');
 
-        // Kategori (kemasan makanan, minuman, dll) - adjusted for eco-friendly packaged goods
-        $categories = Category::select('id', 'name')->get();
+        if ($mode === 'admin') {
+            // Admin dashboard data
+            $totalProducts = Product::count();
+            $totalCategories = Category::count();
+            $totalUsers = \App\Models\User::count();
+            $totalOrders = \App\Models\Order::count();
+            $recentProducts = Product::with('category')->latest()->take(5)->get();
+            $recentOrders = \App\Models\Order::with('user')->latest()->take(5)->get();
 
-        // Produk populer (contoh: paling banyak dibeli) - using created_at as proxy since sold_count not available
-        $popularProducts = Product::with('category')
-            ->orderBy('created_at', 'desc')
-            ->take(5)
-            ->get();
+            return view('dashboard', [
+                'mode' => $mode,
+                'totalProducts' => $totalProducts,
+                'totalCategories' => $totalCategories,
+                'totalUsers' => $totalUsers,
+                'totalOrders' => $totalOrders,
+                'recentProducts' => $recentProducts,
+                'recentOrders' => $recentOrders,
+            ]);
+        } else {
+            // User dashboard data
+            // Kategori (kemasan makanan, minuman, dll) - adjusted for eco-friendly packaged goods
+            $categories = Category::select('id', 'name')->get();
 
-        // Banner / produk random for recycled product image
-        $bannerProduct = Product::inRandomOrder()->first();
+            // Produk populer (contoh: paling banyak dibeli) - using created_at as proxy since sold_count not available
+            $popularProducts = Product::with('category')
+                ->orderBy('created_at', 'desc')
+                ->take(5)
+                ->get();
 
-        // Cart count - set to 0 since cart not implemented
-        $cartCount = 0;
+            // Banner / produk random for recycled product image
+            $bannerProduct = Product::inRandomOrder()->first();
 
-        return view('dashboard', [
-            'mode' => $mode,
-            'categories' => $categories,
-            'popularProducts' => $popularProducts,
-            'bannerProduct' => $bannerProduct,
-            'cartCount' => $cartCount,
-        ]);
+            // Cart count - set to 0 since cart not implemented
+            $cartCount = 0;
+
+            return view('dashboard', [
+                'mode' => $mode,
+                'categories' => $categories,
+                'popularProducts' => $popularProducts,
+                'bannerProduct' => $bannerProduct,
+                'cartCount' => $cartCount,
+            ]);
+        }
     }
 }
