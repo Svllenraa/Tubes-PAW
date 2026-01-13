@@ -12,14 +12,27 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
-                        {{ __('Products') }}
-                    </x-nav-link>
-                    @auth
+                    @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('admin.products.create')" :active="request()->routeIs('admin.products.create')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                            {{ __('Add Product') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                            {{ __('Manage Orders') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                            {{ __('Manage Categories') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                            {{ __('Manage Users') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                            {{ __('Products') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
                             {{ __('My Orders') }}
                         </x-nav-link>
-                    @endauth
+                    @endif
                 </div>
             </div>
 
@@ -56,8 +69,20 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        {{-- PERBAIKAN: My Orders disembunyikan untuk Admin --}}
-                        @if(Auth::user()->role !== 'admin')
+                        @if(Auth::user()->role === 'admin')
+                            <x-dropdown-link :href="route('admin.products.create')">
+                                {{ __('Add Product') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('admin.orders.index')">
+                                {{ __('Manage Orders') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('admin.categories.index')">
+                                {{ __('Manage Categories') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('admin.users.index')">
+                                {{ __('Manage Users') }}
+                            </x-dropdown-link>
+                        @else
                             <x-dropdown-link :href="route('orders.index')">
                                 {{ __('My Orders') }}
                             </x-dropdown-link>
@@ -116,17 +141,29 @@
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+        <div class="mt-3 space-y-1">
+            <x-responsive-nav-link :href="route('profile.edit')">
+                {{ __('Profile') }}
+            </x-responsive-nav-link>
 
-                {{-- PERBAIKAN: My Orders disembunyikan untuk Admin (Mobile) --}}
-                @if(Auth::user()->role !== 'admin')
-                    <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
-                        {{ __('My Orders') }}
-                    </x-responsive-nav-link>
-                @endif
+            @if(Auth::user()->role === 'admin')
+                <x-responsive-nav-link :href="route('admin.products.create')" :active="request()->routeIs('admin.products.create')">
+                    {{ __('Add Product') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                    {{ __('Manage Orders') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">
+                    {{ __('Manage Categories') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                    {{ __('Manage Users') }}
+                </x-responsive-nav-link>
+            @else
+                <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
+                    {{ __('My Orders') }}
+                </x-responsive-nav-link>
+            @endif
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
