@@ -21,7 +21,7 @@
     </div>
 
     <div class="bg-white p-6 rounded-3xl border border-theme-soft shadow-sm mb-8">
-        <form method="GET" action="{{ route('admin.users.index') }}" class="flex flex-col md:flex-row gap-4 items-end md:items-center">
+        <form method="GET" action="{{ route('admin.users.index') }}" class="flex flex-col md:flex-row gap-4 items-end">
             
             <div class="flex-1 w-full relative">
                 <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 ml-1">Search User</label>
@@ -65,8 +65,7 @@
                         <th class="px-6 py-5 font-bold">User Identity</th>
                         <th class="px-6 py-5 font-bold">Role Status</th>
                         <th class="px-6 py-5 font-bold">Joined Date</th>
-                        <th class="px-6 py-5 font-bold text-center">Action</th>
-                    </tr>
+                        </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
                     @forelse($users as $user)
@@ -109,16 +108,11 @@
                                 {{ $user->created_at->diffForHumans() }}
                             </div>
                         </td>
-
-                        <td class="px-6 py-5 text-center">
-                            <button class="text-gray-400 hover:text-theme-main transition-colors" title="View Details">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
-                            </button>
-                        </td>
-                    </tr>
+                        
+                        </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+                        <td colspan="4" class="px-6 py-12 text-center text-gray-500">
                             <div class="flex flex-col items-center justify-center">
                                 <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                                     <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
