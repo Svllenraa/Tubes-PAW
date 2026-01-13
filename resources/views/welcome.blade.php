@@ -10,51 +10,49 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        /* --- 1. INTRO ANIMATION STYLES (NEW) --- */
+        /* --- 1. INTRO ANIMATION STYLES (REVISI: LIGHT THEME) --- */
         #intro-overlay {
             position: fixed;
             inset: 0;
-            z-index: 9999; /* Paling atas */
-            background-color: #0f172a; /* Dark Theme Base */
+            z-index: 9999;
+            background-color: #fdfbf7; /* Warna Putih/Cream Theme */
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); /* Easing mahal */
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1); /* Slide up lebih lambat/elegan */
         }
 
         .intro-text-wrapper {
-            overflow: hidden; /* Biar teks muncul dari "bawah tanah" */
+            overflow: hidden;
         }
 
         .intro-text {
             transform: translateY(120%);
             opacity: 0;
-            animation: textUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            animation: textUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Teks naik lebih pelan */
         }
 
         @keyframes textUp {
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Glowing Blobs Animation */
+        /* Glowing Blobs (Updated Colors for Earth Tone) */
         .blob {
             position: absolute;
-            filter: blur(80px);
-            opacity: 0.6;
-            animation: moveBlob 10s infinite alternate;
+            filter: blur(100px); /* Blur makin gila biar halus */
+            opacity: 0.5;
+            animation: moveBlob 15s infinite alternate; /* Gerak makin pelan */
         }
         @keyframes moveBlob {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, -50px) scale(1.2); }
+            100% { transform: translate(30px, -30px) scale(1.1); }
         }
 
-        /* Kelas buat ngilangin intro (Slide Up) */
         .slide-out {
             transform: translateY(-100%);
         }
 
-        /* Kunci scroll pas intro */
         body.locked {
             overflow: hidden;
         }
@@ -111,32 +109,32 @@
 <body class="antialiased bg-theme-bg text-theme-dark font-sans locked">
 
     <div id="intro-overlay">
-        <div class="blob bg-theme-main w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2 mix-blend-screen"></div>
-        <div class="blob bg-purple-600 w-96 h-96 rounded-full bottom-0 right-0 translate-x-1/2 translate-y-1/2 mix-blend-screen animation-delay-2000"></div>
-        <div class="blob bg-blue-500 w-80 h-80 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-overlay"></div>
+        <div class="blob bg-theme-main w-[500px] h-[500px] rounded-full top-0 left-0 -translate-x-1/3 -translate-y-1/3 mix-blend-multiply"></div>
+        
+        <div class="blob bg-yellow-200 w-[600px] h-[600px] rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3 mix-blend-multiply animation-delay-2000"></div>
+        
+        <div class="blob bg-emerald-200 w-[400px] h-[400px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply opacity-30"></div>
 
-        <div class="relative z-10 text-center text-white px-6">
-            
-            <div class="intro-text-wrapper mb-2">
-                <p class="intro-text text-lg md:text-xl font-medium tracking-[0.3em] text-gray-400 uppercase" style="animation-delay: 0.5s;">
+        <div class="relative z-10 text-center text-theme-dark px-6"> <div class="intro-text-wrapper mb-2">
+                <p class="intro-text text-lg md:text-xl font-bold tracking-[0.4em] text-theme-main uppercase" style="animation-delay: 0.8s;">
                     Welcome To
                 </p>
             </div>
 
             <div class="intro-text-wrapper mb-4">
-                <h1 class="intro-text text-6xl md:text-9xl font-black tracking-tighter" style="animation-delay: 0.8s;">
+                <h1 class="intro-text text-7xl md:text-9xl font-black tracking-tighter text-theme-dark" style="animation-delay: 1.2s;">
                     BAJAMAS<span class="text-theme-main">.</span>
                 </h1>
             </div>
 
             <div class="intro-text-wrapper">
-                <p class="intro-text text-xl md:text-2xl font-light text-gray-300 italic" style="animation-delay: 1.2s;">
-                    "Save the planet, <span class="text-theme-main font-bold not-italic">Elevate your style.</span>"
+                <p class="intro-text text-xl md:text-2xl font-medium text-gray-500 italic" style="animation-delay: 1.8s;">
+                    "Save the planet, <span class="text-theme-main font-bold not-italic decoration-wavy">Elevate your style.</span>"
                 </p>
             </div>
 
-            <div class="w-24 h-1 bg-gray-800 rounded-full mx-auto mt-12 overflow-hidden intro-text" style="animation-delay: 1.5s;">
-                <div class="h-full bg-theme-main animate-[loading_2.5s_ease-in-out_forwards]"></div>
+            <div class="w-32 h-1.5 bg-gray-200 rounded-full mx-auto mt-16 overflow-hidden intro-text" style="animation-delay: 2.2s;">
+                <div class="h-full bg-theme-main animate-[loading_3.5s_ease-in-out_forwards]"></div>
             </div>
             <style>
                 @keyframes loading { 0% { width: 0; } 100% { width: 100%; } }
@@ -145,7 +143,7 @@
     </div>
     <div id="main-site" class="opacity-0 transition-opacity duration-1000">
         
-        <nav class="flex items-center justify-between p-6 lg:px-16 fixed w-full z-50 bg-theme-bg/80 backdrop-blur-md border-b border-white/10 transition-all duration-300" id="navbar">
+        <nav class="flex items-center justify-between p-6 lg:px-16 fixed w-full z-50 bg-theme-bg/80 backdrop-blur-md border-b border-theme-soft/30 transition-all duration-300" id="navbar">
             <div class="flex items-center gap-2">
                 <x-application-logo class="w-10 h-10 fill-current text-theme-main animate-spin-slow" />
                 <span class="font-extrabold text-2xl tracking-tighter text-theme-dark">{{ config('app.name') }}<span class="text-theme-main text-4xl leading-none">.</span></span>
@@ -178,11 +176,11 @@
                             </span>
                             <h1 class="text-7xl lg:text-9xl font-black leading-none tracking-tighter text-theme-dark mb-4">
                                 Bajamas<br>
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-theme-main via-purple-500 to-theme-main animate-gradient-text">
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-theme-main via-green-600 to-theme-main animate-gradient-text">
                                     Gaya Keren,
                                 </span>
                             </h1>
-                            <h2 class="text-6xl lg:text-8xl font-bold text-gray-800 tracking-tight">
+                            <h2 class="text-6xl lg:text-8xl font-black leading-none tracking-tighter text-theme-dark mb-4">
                                 Bumi Aman.
                             </h2>
                         </div>
@@ -226,8 +224,8 @@
             <section class="py-8 bg-theme-dark text-white border-y border-white/10 rotate-1 scale-105 transform origin-left shadow-2xl z-20 relative">
                 <div class="marquee-container">
                     <div class="marquee-content font-black text-4xl uppercase tracking-tighter opacity-80">
-                        Sustainable Fashion • Eco Friendly • High Quality • Save The Earth • Bajamas Official • 
-                        Sustainable Fashion • Eco Friendly • High Quality • Save The Earth • Bajamas Official •
+                        Sustainable Things • Eco Friendly • High Quality • Save The Earth • Bajamas Official • 
+                        Sustainable Things • Eco Friendly • High Quality • Save The Earth • Bajamas Official •
                     </div>
                 </div>
             </section>
@@ -325,33 +323,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. Logic Intro Animation
             const introOverlay = document.getElementById('intro-overlay');
             const mainSite = document.getElementById('main-site');
             const body = document.body;
 
-            // Total durasi intro (misal 3.5 detik baru buka)
+            // Durasi diperlama jadi 5.5 detik (5500ms)
             setTimeout(() => {
-                // Geser intro ke atas (slide up)
                 introOverlay.classList.add('slide-out');
-                
-                // Munculin konten utama
                 mainSite.classList.remove('opacity-0');
-                
-                // Balikin scroll
                 body.classList.remove('locked');
-
-                // Trigger scroll reveal
                 revealOnScroll();
-            }, 3500); // 3500ms = 3.5 detik user nonton intro
+            }, 5500); 
 
-            // 2. Logic Scroll Reveal
+            // Scroll Reveal Logic
             const reveals = document.querySelectorAll('.reveal');
-
             function revealOnScroll() {
                 const windowHeight = window.innerHeight;
                 const elementVisible = 150;
-
                 reveals.forEach((reveal) => {
                     const elementTop = reveal.getBoundingClientRect().top;
                     if (elementTop < windowHeight - elementVisible) {
@@ -359,7 +347,6 @@
                     }
                 });
             }
-
             window.addEventListener('scroll', revealOnScroll);
         });
     </script>
