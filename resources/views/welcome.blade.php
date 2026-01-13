@@ -85,13 +85,13 @@
                     <div>
                         <span
                             class="inline-block px-5 py-2 rounded-full bg-theme-main/20 text-theme-dark text-sm font-bold tracking-widest mb-6 border border-theme-soft uppercase">
-                            New Drop 2024
+                            New Drop 2026
                         </span>
                         <h1 class="text-8xl lg:text-8xl font-black leading-none tracking-tight text-theme-dark">
                             Bajamas <br>
                             <span
                                 class="text-transparent bg-clip-text bg-gradient-to-br from-theme-main via-theme-dark to-gray-800">
-                                Gaya Keren.
+                                Gaya Keren,
                             </span>
                         </h1>
                         <h2 class="text-8xl lg:text-8xl font-bold text-gray-80 mt-2">
