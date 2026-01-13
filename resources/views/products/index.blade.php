@@ -51,16 +51,21 @@
         @forelse($products as $product)
             <div class="flex flex-col h-full overflow-hidden transition-all duration-300 bg-white border group rounded-xl border-theme-soft hover:shadow-lg">
 
-                <div class="relative w-full h-48 overflow-hidden bg-gray-100">
+                <div class="relative w-full h-48 overflow-hidden bg-gray-100 @if($product->category && in_array($product->category->slug, ['kemasan-makanan', 'kemasan-minuman', 'kemasan-pakaian'])) border-4 border-theme-main rounded-lg @endif">
                     @if($product->image)
                         {{-- Menggunakan asset() untuk mengakses folder public/storage --}}
                         <img src="{{ asset('storage/' . $product->image) }}"
                              alt="{{ $product->name }}"
-                             class="object-cover w-full h-full transition-transform duration-500 transform group-hover:scale-105"
+                             class="object-cover w-full h-full transition-transform duration-500 transform group-hover:scale-105 @if($product->category && in_array($product->category->slug, ['kemasan-makanan', 'kemasan-minuman', 'kemasan-pakaian'])) rounded-md @endif"
                              onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=File+Tidak+Ada';">
                     @else
-                        <div class="flex items-center justify-center w-full h-full text-xs italic text-theme-dark/50">
+                        <div class="flex items-center justify-center w-full h-full text-xs italic text-theme-dark/50 @if($product->category && in_array($product->category->slug, ['kemasan-makanan', 'kemasan-minuman', 'kemasan-pakaian'])) rounded-md @endif">
                             No Image Available
+                        </div>
+                    @endif
+                    @if($product->category && in_array($product->category->slug, ['kemasan-makanan', 'kemasan-minuman', 'kemasan-pakaian']))
+                        <div class="absolute top-2 right-2 bg-theme-main text-white px-2 py-1 text-xs font-bold rounded-md uppercase">
+                            {{ Str::replace('kemasan-', '', $product->category->slug) }}
                         </div>
                     @endif
                 </div>

@@ -12,6 +12,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                        {{ __('Products') }}
+                    </x-nav-link>
+                    @auth
+                        <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                            {{ __('My Orders') }}
+                        </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
@@ -68,6 +76,16 @@
             </div>
             @else
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
+                {{-- Search Bar for Guests --}}
+                <form method="GET" action="{{ route('products.index') }}" class="me-4 flex items-center">
+                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Search products..."
+                        class="w-48 px-3 py-2 text-sm border border-theme-soft rounded-l-lg focus:ring-theme-main focus:border-theme-main bg-white">
+                    <button type="submit" class="px-3 py-2 bg-theme-main text-white rounded-r-lg hover:bg-theme-dark transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </form>
                 <a href="{{ route('login') }}" class="text-sm font-medium text-theme-dark hover:text-theme-main transition-colors">Login</a>
                 <a href="{{ route('register') }}" class="px-4 py-2 text-sm font-medium text-white bg-theme-main rounded-lg hover:bg-theme-dark transition-colors">Register</a>
             </div>
@@ -105,7 +123,7 @@
 
                 {{-- PERBAIKAN: My Orders disembunyikan untuk Admin (Mobile) --}}
                 @if(Auth::user()->role !== 'admin')
-                    <x-responsive-nav-link :href="route('orders.index')">
+                    <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
                         {{ __('My Orders') }}
                     </x-responsive-nav-link>
                 @endif
