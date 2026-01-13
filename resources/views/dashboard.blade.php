@@ -21,9 +21,7 @@
                 @if($mode === 'admin' || (auth()->check() && auth()->user()->role === 'admin' && $mode === null))
                     @include('dashboard.admin')
                 @else
-                    <div class="max-w-4xl mx-auto">
-                        @include('dashboard.user')
-                    </div>
+                    @include('dashboard.user') 
                 @endif
             </div>
         </div>
