@@ -45,28 +45,11 @@ class ProductController extends Controller
         $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
             ->latest()
-            ->limit(4) 
+            ->limit(4)
             ->get();
 
         return view('products.show', compact('product', 'relatedProducts'));
     }
 
-    /**
-     * Filter produk berdasarkan slug kategori secara dinamis dari database.
-     */
-    public function showByCategory($categorySlug)
-    {
-        // Perbaikan: Jangan hardcode array. Ambil langsung dari DB berdasarkan slug.
-        $category = Category::where('slug', $categorySlug)->firstOrFail();
 
-        $products = Product::with('category')
-            ->where('category_id', $category->id)
-            ->latest()
-            ->paginate(12);
-
-        $categories = Category::all();
-        $categoryName = $category->name;
-
-        return view('products.index', compact('products', 'categories', 'categoryName'));
-    }
 }

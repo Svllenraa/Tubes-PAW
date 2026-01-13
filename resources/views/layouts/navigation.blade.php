@@ -13,8 +13,8 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @if(Auth::user()->role === 'admin')
-                        <x-nav-link :href="route('admin.products.create')" :active="request()->routeIs('admin.products.create')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
-                            {{ __('Add Product') }}
+                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                            {{ __('Manage Product') }}
                         </x-nav-link>
                         <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
                             {{ __('Manage Orders') }}
@@ -28,6 +28,9 @@
                     @else
                         <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
                             {{ __('Products') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                            {{ __('Category') }}
                         </x-nav-link>
                         <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
                             {{ __('My Orders') }}
@@ -70,8 +73,8 @@
                         </x-dropdown-link>
 
                         @if(Auth::user()->role === 'admin')
-                            <x-dropdown-link :href="route('admin.products.create')">
-                                {{ __('Add Product') }}
+                            <x-dropdown-link :href="route('admin.products.index')">
+                                {{ __('Manage Product') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('admin.orders.index')">
                                 {{ __('Manage Orders') }}
@@ -147,8 +150,8 @@
             </x-responsive-nav-link>
 
             @if(Auth::user()->role === 'admin')
-                <x-responsive-nav-link :href="route('admin.products.create')" :active="request()->routeIs('admin.products.create')">
-                    {{ __('Add Product') }}
+                <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
+                    {{ __('Manage Product') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
                     {{ __('Manage Orders') }}
@@ -160,6 +163,9 @@
                     {{ __('Manage Users') }}
                 </x-responsive-nav-link>
             @else
+                <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                    {{ __('Category') }}
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
                     {{ __('My Orders') }}
                 </x-responsive-nav-link>
