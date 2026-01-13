@@ -9,16 +9,19 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of products for public view.
+     * Tampilan utama produk dengan fitur pencarian dan filter.
      */
     public function index(Request $request)
     {
+        // Gunakan Eager Loading 'category' untuk mencegah N+1 query
         $query = Product::with('category')->latest();
 
+        // Pencarian Nama
         if ($request->filled('q')) {
-            $query->where('name', 'like', '%'.$request->q.'%');
+            $query->where('name', 'like', '%' . $request->q . '%');
         }
 
+        // Filter Kategori (berdasarkan ID)
         if ($request->filled('category_id')) {
             $query->where('category_id', $request->category_id);
         }
@@ -30,39 +33,39 @@ class ProductController extends Controller
     }
 
     /**
-     * Display a single product.
+     * Menampilkan detail produk DAN produk terkait.
      */
     public function show(Product $product)
     {
+        // 1. Load data kategori produk utama
         $product->load('category');
 
-        return view('products.show', compact('product'));
+        // 2. Logic Backend Produk Terkait:
+        // Mencari produk dengan category_id yang sama, namun mengecualikan dirinya sendiri.
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
+            ->latest()
+            ->limit(4) 
+            ->get();
+
+        return view('products.show', compact('product', 'relatedProducts'));
     }
 
     /**
-     * Display products by category.
+     * Filter produk berdasarkan slug kategori secara dinamis dari database.
      */
     public function showByCategory($categorySlug)
     {
-        $categoryNames = [
-            'kemasan-makanan' => 'Kemasan Makanan',
-            'kemasan-minuman' => 'Kemasan Minuman',
-            'kemasan-pakaian' => 'Kemasan Pakaian',
-        ];
-
-        if (!array_key_exists($categorySlug, $categoryNames)) {
-            abort(404);
-        }
-
-        $categoryName = $categoryNames[$categorySlug];
+        // Perbaikan: Jangan hardcode array. Ambil langsung dari DB berdasarkan slug.
+        $category = Category::where('slug', $categorySlug)->firstOrFail();
 
         $products = Product::with('category')
-            ->whereHas('category', function ($query) use ($categoryName) {
-                $query->where('name', $categoryName);
-            })
+            ->where('category_id', $category->id)
+            ->latest()
             ->paginate(12);
 
         $categories = Category::all();
+        $categoryName = $category->name;
 
         return view('products.index', compact('products', 'categories', 'categoryName'));
     }
