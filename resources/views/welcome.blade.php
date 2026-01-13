@@ -332,8 +332,8 @@
                     class="py-8 bg-theme-dark text-white border-y border-white/10 rotate-1 scale-110 transform origin-center shadow-2xl z-20 relative">
                     <div class="marquee-container">
                         <div class="marquee-content font-black text-4xl uppercase tracking-tighter opacity-80">
-                            Sustainable Fashion • Eco Friendly • High Quality • Save The Earth • Bajamas Official •
-                            Sustainable Fashion • Eco Friendly • High Quality • Save The Earth • Bajamas Official •
+                            Sustainable Product • Eco Friendly • High Quality • Save The Earth • Bajamas Official •
+                            Sustainable Product • Eco Friendly • High Quality • Save The Earth • Bajamas Official •
                         </div>
                     </div>
                 </section>
