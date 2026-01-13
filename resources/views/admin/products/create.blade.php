@@ -1,15 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Create Product</h1>
-    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
-        @csrf
-        @include('admin.products._form')
+<div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <div class="flex justify-between items-center mb-8">
         <div>
-            <button class="btn btn-primary">Save</button>
-            <a href="{{ route('admin.products.index') }}" class="ml-2">Cancel</a>
+            <h1 class="text-2xl font-black text-theme-dark">Add New Product</h1>
+            <p class="text-gray-500 text-sm mt-1">Create a new item for your store catalog.</p>
         </div>
-    </form>
+        <a href="{{ route('admin.products.index') }}" class="text-sm font-bold text-theme-main hover:text-theme-dark transition-colors flex items-center gap-1">
+            &larr; Back to List
+        </a>
+    </div>
+
+    <div class="bg-white rounded-3xl border border-theme-soft shadow-sm p-8">
+        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @include('admin.products._form')
+        </form>
+    </div>
 </div>
 @endsection
