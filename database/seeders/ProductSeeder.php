@@ -18,6 +18,9 @@ class ProductSeeder extends Seeder
     {
         // sample categories
         $categories = collect([
+            ['name' => 'Kemasan Makanan', 'slug' => 'kemasan-makanan'],
+            ['name' => 'Kemasan Minuman', 'slug' => 'kemasan-minuman'],
+            ['name' => 'Kemasan Pakaian', 'slug' => 'kemasan-pakaian'],
             ['name' => 'Clothing', 'slug' => 'clothing'],
             ['name' => 'Accessories', 'slug' => 'accessories'],
             ['name' => 'Home', 'slug' => 'home'],
@@ -27,6 +30,30 @@ class ProductSeeder extends Seeder
 
         // sample products
         $samples = [
+            [
+                'name' => 'Kemasan Makanan Premium',
+                'slug' => 'kemasan-makanan-premium',
+                'description' => 'Kemasan makanan berkualitas tinggi untuk produk makanan.',
+                'price' => 25000,
+                'category' => 'kemasan-makanan',
+                'image' => null,
+            ],
+            [
+                'name' => 'Kemasan Minuman Botol',
+                'slug' => 'kemasan-minuman-botol',
+                'description' => 'Kemasan minuman untuk botol dengan desain menarik.',
+                'price' => 15000,
+                'category' => 'kemasan-minuman',
+                'image' => null,
+            ],
+            [
+                'name' => 'Kemasan Pakaian Fashion',
+                'slug' => 'kemasan-pakaian-fashion',
+                'description' => 'Kemasan pakaian stylish untuk produk fashion.',
+                'price' => 35000,
+                'category' => 'kemasan-pakaian',
+                'image' => null,
+            ],
             [
                 'name' => 'Basic T-Shirt',
                 'slug' => 'basic-t-shirt',
