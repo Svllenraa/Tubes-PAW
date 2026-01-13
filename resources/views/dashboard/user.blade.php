@@ -132,7 +132,7 @@
                     class="relative h-80 md:h-full min-h-[400px] flex items-center justify-center bg-gradient-to-br from-theme-main/20 to-transparent">
                     @if ($bannerProduct && $bannerProduct->image)
                         <img src="{{ asset('storage/' . $bannerProduct->image) }}" alt="Hero Product"
-                            class="w-3/4 md:w-2/3 object-contain drop-shadow-2xl animate-float rounded-3xl transform rotate-3 hover:rotate-0 transition-transform duration-700">
+                            class="w-3/4 md:w-2/3 object-contain ...">
                     @else
                         <div
                             class="w-56 h-56 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center animate-float shadow-2xl">
