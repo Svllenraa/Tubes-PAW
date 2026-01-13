@@ -22,12 +22,27 @@
     <div>
         <h4 class="text-lg font-semibold mb-4">Kategori Barang</h4>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            @foreach($categories as $category)
-                <div class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                    <h5 class="font-medium">{{ $category->name }}</h5>
+            <a href="{{ route('categories.show', 'kemasan-makanan') }}" class="block bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow hover:bg-gray-50">
+                <div class="text-center">
+                    <span class="text-4xl mb-2 block">🍽️</span>
+                    <h5 class="font-medium">Kemasan Makanan</h5>
                     <p class="text-sm text-gray-600">Kategori produk</p>
                 </div>
-            @endforeach
+            </a>
+            <a href="{{ route('categories.show', 'kemasan-minuman') }}" class="block bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow hover:bg-gray-50">
+                <div class="text-center">
+                    <span class="text-4xl mb-2 block">🥤</span>
+                    <h5 class="font-medium">Kemasan Minuman</h5>
+                    <p class="text-sm text-gray-600">Kategori produk</p>
+                </div>
+            </a>
+            <a href="{{ route('categories.show', 'kemasan-pakaian') }}" class="block bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow hover:bg-gray-50">
+                <div class="text-center">
+                    <span class="text-4xl mb-2 block">👕</span>
+                    <h5 class="font-medium">Kemasan Pakaian</h5>
+                    <p class="text-sm text-gray-600">Kategori produk</p>
+                </div>
+            </a>
         </div>
     </div>
 

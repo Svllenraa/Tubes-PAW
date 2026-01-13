@@ -38,4 +38,32 @@ class ProductController extends Controller
 
         return view('products.show', compact('product'));
     }
+
+    /**
+     * Display products by category.
+     */
+    public function showByCategory($categorySlug)
+    {
+        $categoryNames = [
+            'kemasan-makanan' => 'Kemasan Makanan',
+            'kemasan-minuman' => 'Kemasan Minuman',
+            'kemasan-pakaian' => 'Kemasan Pakaian',
+        ];
+
+        if (!array_key_exists($categorySlug, $categoryNames)) {
+            abort(404);
+        }
+
+        $categoryName = $categoryNames[$categorySlug];
+
+        $products = Product::with('category')
+            ->whereHas('category', function ($query) use ($categoryName) {
+                $query->where('name', $categoryName);
+            })
+            ->paginate(12);
+
+        $categories = Category::all();
+
+        return view('products.index', compact('products', 'categories', 'categoryName'));
+    }
 }

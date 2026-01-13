@@ -13,6 +13,9 @@ Route::get('/', function () {
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 
+// Category routes
+Route::get('/categories/{category}', [ProductController::class, 'showByCategory'])->name('categories.show');
+
 use App\Http\Controllers\DashboardController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
