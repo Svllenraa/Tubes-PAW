@@ -384,7 +384,7 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-3xl font-black text-theme-dark mb-4 text-center">Secure Payment</h3>
+                            <h3 class="text-3xl font-black text-theme-dark mb-4 text-center">Secure Payment,</h3>
                             <p class="text-gray-500 leading-relaxed text-center">Transaksi aman dengan berbagai metode pembayaran
                                 terpercaya.</p>
                         </div>
