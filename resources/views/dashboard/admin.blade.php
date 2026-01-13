@@ -1,5 +1,5 @@
 <div class="space-y-8 animate-fade-up">
-    
+
     <div class="relative overflow-hidden rounded-3xl bg-theme-dark shadow-xl">
         <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-theme-main/20 rounded-full blur-2xl"></div>
@@ -59,7 +59,7 @@
                 <span>This Month</span>
             </div>
         </a>
-        <div class="group bg-white border border-theme-soft rounded-2xl p-6 hover:shadow-lg hover:border-theme-main transition-all duration-300">
+        <a href="{{ route('admin.orders.index') }}" class="group bg-white border border-theme-soft rounded-2xl p-6 hover:shadow-lg hover:border-theme-main transition-all duration-300">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-bold text-gray-500 uppercase tracking-wider">Total Orders</p>
@@ -72,11 +72,11 @@
             <div class="mt-4 flex items-center text-xs text-gray-400 font-medium">
                 <span class="text-theme-dark font-bold">Revenue: Rp {{ number_format($totalRevenue ?? 0, 0, ',', '.') }}</span>
             </div>
-        </div>
+        </a>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        
+
         <div class="lg:col-span-2">
             <div class="flex items-center justify-between mb-6">
                 <h4 class="text-xl font-bold text-theme-dark flex items-center gap-2">
@@ -85,7 +85,7 @@
                 </h4>
                 <a href="{{ route('admin.products.index') }}" class="text-sm font-bold text-theme-main hover:text-theme-dark hover:underline transition-colors">View All &rarr;</a>
             </div>
-            
+
             <div class="bg-white border border-theme-soft rounded-2xl overflow-hidden shadow-sm">
                 <div class="divide-y divide-gray-100">
                     @forelse($recentProducts ?? [] as $product)
@@ -122,7 +122,7 @@
         </div>
 
         <div class="space-y-8">
-            
+
             <div>
                  <h4 class="text-xl font-bold text-theme-dark flex items-center gap-2 mb-6">
                     <span class="w-2 h-8 bg-theme-main rounded-full"></span>
