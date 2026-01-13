@@ -357,8 +357,8 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-3xl font-black text-theme-dark mb-4">Premium Quality</h3>
-                            <p class="text-gray-500 leading-relaxed">Bahan terbaik dan aman, awet, dan tidak mudah
+                            <h3 class="text-3xl font-black text-theme-dark mb-4 text-center">Premium Quality</h3>
+                            <p class="text-gray-500 leading-relaxed text-center">Bahan terbaik dan aman, awet, dan tidak mudah
                                 rusak. Dijamin puas.</p>
                         </div>
                         <div
@@ -370,8 +370,8 @@
                                         d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-3xl font-black text-theme-dark mb-4">Fast Shipping</h3>
-                            <p class="text-gray-500 leading-relaxed">Pesanan dikirim di hari yang sama. Gak pake lama,
+                            <h3 class="text-3xl font-black text-theme-dark mb-4 text-center">Fast Shipping</h3>
+                            <p class="text-gray-500 leading-relaxed text-center">Pesanan dikirim di hari yang sama. Gak pake lama,
                                 langsung sampai tujuan.</p>
                         </div>
                         <div
@@ -384,8 +384,8 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-3xl font-black text-theme-dark mb-4">Secure Payment</h3>
-                            <p class="text-gray-500 leading-relaxed">Transaksi aman dengan berbagai metode pembayaran
+                            <h3 class="text-3xl font-black text-theme-dark mb-4 text-center">Secure Payment</h3>
+                            <p class="text-gray-500 leading-relaxed text-center">Transaksi aman dengan berbagai metode pembayaran
                                 terpercaya.</p>
                         </div>
                     </div>
