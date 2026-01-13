@@ -3,7 +3,6 @@
     <div class="relative overflow-hidden rounded-3xl bg-theme-dark shadow-xl">
         <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-theme-main/20 rounded-full blur-2xl"></div>
-        
         <div class="relative p-8 sm:p-10 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
                 <h3 class="text-3xl font-black tracking-tight">Admin Dashboard</h3>
@@ -16,7 +15,6 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
         <a href="{{ route('admin.products.index') }}" class="group bg-white border border-theme-soft rounded-2xl p-6 hover:shadow-lg hover:border-theme-main transition-all duration-300">
             <div class="flex items-center justify-between">
                 <div>
@@ -28,15 +26,9 @@
                 </div>
             </div>
             <div class="mt-4 flex items-center text-xs text-gray-400 font-medium">
-                <span class="text-theme-main flex items-center gap-1">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    Active
-                </span>
-                <span class="mx-2">•</span>
-                <span>In Catalog</span>
+                <span class="text-theme-main font-bold">In Catalog</span>
             </div>
         </a>
-
         <a href="{{ route('admin.categories.index') }}" class="group bg-white border border-theme-soft rounded-2xl p-6 hover:shadow-lg hover:border-theme-main transition-all duration-300">
             <div class="flex items-center justify-between">
                 <div>
@@ -48,10 +40,9 @@
                 </div>
             </div>
             <div class="mt-4 flex items-center text-xs text-gray-400 font-medium">
-                <span class="text-theme-main">Updated today</span>
+                <span class="text-theme-main font-bold">Active</span>
             </div>
         </a>
-
         <a href="{{ route('admin.users.index') }}" class="group bg-white border border-theme-soft rounded-2xl p-6 hover:shadow-lg hover:border-theme-main transition-all duration-300">
             <div class="flex items-center justify-between">
                 <div>
@@ -63,14 +54,11 @@
                 </div>
             </div>
             <div class="mt-4 flex items-center text-xs text-gray-400 font-medium">
-                <span class="text-green-600 flex items-center gap-1">
-                    +{{ $newUsersCount ?? 0 }} New
-                </span>
+                <span class="text-green-600 font-bold">+{{ $newUsersCount ?? 0 }} New</span>
                 <span class="mx-2">•</span>
                 <span>This Month</span>
             </div>
         </a>
-
         <div class="group bg-white border border-theme-soft rounded-2xl p-6 hover:shadow-lg hover:border-theme-main transition-all duration-300">
             <div class="flex items-center justify-between">
                 <div>
@@ -87,7 +75,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         
         <div class="lg:col-span-2">
             <div class="flex items-center justify-between mb-6">
@@ -113,7 +101,6 @@
                                             </div>
                                         @endif
                                     </div>
-                                    
                                     <div>
                                         <p class="font-bold text-gray-800 group-hover:text-theme-dark transition-colors">{{ $product->name }}</p>
                                         <p class="text-sm text-gray-500">{{ $product->category?->name ?? 'Uncategorized' }}</p>
@@ -127,9 +114,6 @@
                         </a>
                     @empty
                         <div class="p-8 text-center">
-                            <div class="inline-block p-4 rounded-full bg-theme-bg text-theme-dark mb-3">
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
-                            </div>
                             <p class="text-gray-500">Belum ada produk.</p>
                         </div>
                     @endforelse
@@ -156,13 +140,47 @@
                 </div>
             </div>
 
+            <div class="bg-white border border-theme-soft rounded-2xl p-6 shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <h5 class="font-bold text-theme-dark">Monthly Goal</h5>
+                    <span class="text-xs font-bold text-theme-main bg-theme-bg px-2 py-1 rounded">On Track</span>
+                </div>
+                <div class="flex items-end gap-2 mb-2">
+                    <span class="text-3xl font-black text-theme-dark">85%</span>
+                    <span class="text-sm text-gray-500 mb-1">completed</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-2.5">
+                    <div class="bg-theme-dark h-2.5 rounded-full" style="width: 85%"></div>
+                </div>
+                <p class="text-xs text-gray-400 mt-3">Target: 100 sales this month</p>
+            </div>
+
+            <div class="bg-theme-bg/50 border border-theme-soft rounded-2xl p-6">
+                <h5 class="font-bold text-theme-dark mb-4">Platform Status</h5>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="flex items-center gap-2 text-gray-600">
+                            <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
+                            System Online
+                        </span>
+                        <span class="text-theme-dark font-bold">100%</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                         <span class="flex items-center gap-2 text-gray-600">
+                            <span class="w-2.5 h-2.5 bg-green-500 rounded-full"></span>
+                            Database
+                        </span>
+                        <span class="text-theme-dark font-bold">Healthy</span>
+                    </div>
+                </div>
+            </div>
+
             @if(isset($lowStockProducts) && $lowStockProducts->count() > 0)
-                <div class="bg-red-50 border border-red-100 rounded-2xl p-5 animate-pulse">
+                <div class="bg-red-50 border border-red-100 rounded-2xl p-5">
                     <div class="flex items-center gap-3 mb-3 text-red-700">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        <h4 class="font-bold text-lg">Low Stock Alert!</h4>
+                        <h4 class="font-bold text-lg">Low Stock!</h4>
                     </div>
-                    <p class="text-sm text-red-600 mb-4">{{ $lowStockProducts->count() }} items need restock.</p>
                     <ul class="space-y-2">
                         @foreach($lowStockProducts as $product)
                             <li class="flex justify-between items-center text-sm bg-white p-2 rounded-lg border border-red-100">
