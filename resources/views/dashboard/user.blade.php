@@ -1,25 +1,50 @@
-<div class="bg-white overflow-hidden shadow-sm sm:rounded-xl border border-theme-soft">
-    <div class="p-6">
-        <h3 class="text-xl font-bold text-theme-dark">User Dashboard</h3>
-        
-        <p class="mt-2 text-sm text-gray-600">
-            Welcome back! Here are some quick actions:
-        </p>
+<div class="space-y-8">
+    <!-- Gambar Sampah Daur Ulang -->
+    <div class="bg-gradient-to-r from-green-400 to-blue-500 rounded-lg p-6 text-white">
+        @if($bannerProduct && $bannerProduct->image)
+            <div class="text-center">
+                <img src="{{ asset('storage/' . $bannerProduct->image) }}" alt="Sampah Daur Ulang" class="w-48 h-48 object-cover rounded-lg mx-auto mb-4">
+                <h3 class="text-xl font-bold">Sampah Daur Ulang</h3>
+                <p class="text-sm opacity-90">{{ $bannerProduct->name }}</p>
+            </div>
+        @else
+            <div class="text-center">
+                <div class="w-48 h-48 bg-white/20 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                    <span class="text-4xl">♻️</span>
+                </div>
+                <h3 class="text-xl font-bold">Sampah Daur Ulang</h3>
+                <p class="text-sm opacity-90">Produk ramah lingkungan</p>
+            </div>
+        @endif
+    </div>
 
-        <ul class="mt-6 space-y-3">
-            <li class="flex items-center group">
-                <span class="w-2 h-2 bg-theme-main rounded-full mr-3 group-hover:bg-theme-dark transition-colors"></span>
-                <a href="{{ route('products.index') }}" class="font-medium text-theme-dark hover:text-theme-main hover:underline transition-colors">
-                    Browse Products
-                </a>
-            </li>
+    <!-- Menu Kategori Barang -->
+    <div>
+        <h4 class="text-lg font-semibold mb-4">Kategori Barang</h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            @foreach($categories as $category)
+                <div class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <h5 class="font-medium">{{ $category->name }}</h5>
+                    <p class="text-sm text-gray-600">Kategori produk</p>
+                </div>
+            @endforeach
+        </div>
+    </div>
 
-            <li class="flex items-center group">
-                <span class="w-2 h-2 bg-theme-main rounded-full mr-3 group-hover:bg-theme-dark transition-colors"></span>
-                <a href="{{ route('profile.edit') }}" class="font-medium text-theme-dark hover:text-theme-main hover:underline transition-colors">
-                    Edit Profile
-                </a>
-            </li>
-        </ul>
+    <!-- Barang yang Paling Dicari -->
+    <div>
+        <h4 class="text-lg font-semibold mb-4">Barang yang Paling Dicari</h4>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            @foreach($popularProducts as $product)
+                <div class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    @if($product->image)
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-32 object-cover rounded mb-2">
+                    @endif
+                    <h5 class="font-medium text-sm">{{ $product->name }}</h5>
+                    <p class="text-xs text-gray-600">{{ $product->category->name ?? 'N/A' }}</p>
+                    <p class="text-sm font-bold text-green-600">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                </div>
+            @endforeach
+        </div>
     </div>
 </div>
