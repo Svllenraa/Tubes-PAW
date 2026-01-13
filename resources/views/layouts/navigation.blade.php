@@ -1,7 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white/80 backdrop-blur-md border-b border-theme-soft sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20"> <div class="flex">
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-theme-dark" />
@@ -9,30 +8,30 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-theme-dark hover:text-theme-main active:text-theme-main font-medium text-base">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @if(Auth::user()->role === 'admin')
-                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main font-medium text-base">
                             {{ __('Manage Product') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                        <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main font-medium text-base">
                             {{ __('Manage Orders') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                        <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main font-medium text-base">
                             {{ __('Manage Categories') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main font-medium text-base">
                             {{ __('Manage Users') }}
                         </x-nav-link>
                     @else
-                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
-                            {{ __('Products') }}
+                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main font-medium text-base">
+                            {{ __('Shop') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main font-medium text-base">
                             {{ __('Category') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main">
+                        <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')" class="text-theme-dark hover:text-theme-main active:text-theme-main font-medium text-base">
                             {{ __('My Orders') }}
                         </x-nav-link>
                     @endif
@@ -41,7 +40,7 @@
 
             @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                {{-- PERBAIKAN: Cart disembunyikan untuk Admin --}}
+                {{-- Cart Section (Sintaks Tetap Sesuai Punya Lu) --}}
                 @if(Auth::user()->role !== 'admin')
                     <a href="{{ route('cart.index') }}" class="me-4 inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-theme-dark bg-transparent hover:bg-theme-bg hover:text-theme-main transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 me-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -56,7 +55,7 @@
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-theme-dark bg-transparent hover:text-theme-main focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-bold rounded-md text-theme-dark bg-transparent hover:text-theme-main focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -95,7 +94,7 @@
                             @csrf
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                this.closest('form').submit();" class="text-red-500 font-bold">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
@@ -175,7 +174,7 @@
                     @csrf
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                                    this.closest('form').submit();" class="text-red-500 font-bold">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
