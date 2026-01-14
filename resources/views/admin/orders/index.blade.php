@@ -44,7 +44,6 @@
                             <tr class="bg-theme-bg/50 border-b border-theme-soft text-theme-dark uppercase text-xs tracking-wider">
                                 <th class="px-8 py-5 font-bold">Order ID</th>
                                 <th class="px-6 py-5 font-bold">Customer</th>
-                                <th class="px-6 py-5 font-bold">Total Amount</th>
                                 <th class="px-6 py-5 font-bold">Status</th>
                                 <th class="px-6 py-5 font-bold">Date</th>
                                 <th class="px-6 py-5 font-bold text-center">Action</th>
@@ -59,9 +58,6 @@
                                     <td class="px-6 py-5">
                                         <div class="font-bold text-theme-dark">{{ $order->user->name }}</div>
                                         <div class="text-xs text-gray-400">{{ $order->user->email }}</div>
-                                    </td>
-                                    <td class="px-6 py-5 font-bold text-theme-dark">
-                                        Rp {{ number_format($order->total_amount, 0, ',', '.') }}
                                     </td>
                                     <td class="px-6 py-5">
                                         @php
