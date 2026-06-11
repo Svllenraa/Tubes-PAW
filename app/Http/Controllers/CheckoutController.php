@@ -41,7 +41,7 @@ class CheckoutController extends Controller
         $request->validate([
             'recipient_name' => 'required|string|max:255',
             'address' => 'required|string',
-            'phone' => 'nullable|string|max:50',
+            'phone' => 'required|string|max:50',
         ]);
 
         DB::beginTransaction();
